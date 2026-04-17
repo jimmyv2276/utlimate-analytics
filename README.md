@@ -1,5 +1,4 @@
 # Ulti Analytics
-# Ulti Analytics
 
 A personal learning project inspired by tools like UltiAnalytics.
 
