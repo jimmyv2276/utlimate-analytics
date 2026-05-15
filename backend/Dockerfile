@@ -5,9 +5,19 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# ✅ Install CA certificates
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+# ✅ Tell pip to trust common PyPI hosts (corporate-safe)
+RUN pip install --no-cache-dir \
+    --trusted-host pypi.org \
+    --trusted-host files.pythonhosted.org \
+    -r requirements.txt
 
 COPY app ./app
 
